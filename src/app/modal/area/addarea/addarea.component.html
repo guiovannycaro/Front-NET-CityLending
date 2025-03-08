@@ -1,0 +1,46 @@
+<form [formGroup]="areaForm" (ngSubmit)="onSubmit()">
+
+    <div style="width: 80% !important;MARGIN: 0% 5% 0% 10%;">
+
+        <div class="row col-xs-12">
+            <h1 style="margin: 3% 0% 0% 20% ;text-align: center;"><b> Nuevo Usuario</b></h1>
+        </div>
+
+        <div class="row col-xs-6">
+            <div class="col">
+                <label for="lnombre">Descripcion</label>
+                <input type="text" class="form-control" id="description" name="description" formControlName="are_description" placeholder="Descripcion">
+            </div>
+            <div class="col">
+                <label for="ldireccion">Estado</label>
+
+                <select class="form-select" aria-label="Default select example" id="status" name="status" formControlName="are_status" style="width: 100%;height: 38px;border: 1px solid #ced4da">
+                  <option selected>Select Option</option>
+                  <option value="true">Active</option>
+                  <option value="false">Inactive</option>
+
+                </select>
+
+            </div>
+        </div>
+
+        <div class="row col-xs-12">
+            <div>&nbsp;
+                <input type="hidden" class="form-control" id="are_idcarea" name="are_idcarea" formControlName="are_idcarea" value="0">
+            </div>
+        </div>
+        <div class="row col-xs-12">
+            <div class="col" style=" text-align: center;">
+                <button type="button" class="btn btn-primary" mat-dialog-close="true">Cancelar</button>
+            </div>
+            <div class="col" style=" text-align: center;">
+                <button type="submit" [mat-dialog-close]="true" class="btn btn-success">Guardar</button>
+            </div>
+        </div>
+
+
+        <div class="row col-xs-12">
+            <div>&nbsp;</div>
+        </div>
+    </div>
+</form>

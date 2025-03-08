@@ -1,0 +1,56 @@
+<table>
+    <tr *ngFor="let i of areasar">
+        <td>
+            <form (ngSubmit)="onSubmit()">
+                <div style="width: 90% !important;MARGIN: 0% 5% 0% 10%;">
+                    <div class="row col-xs-12">
+                        <h1 style=" text-align: center;"><b> Editar Area</b></h1>
+                    </div>
+
+                    <div class="row col-xs-6">
+                        <div class="col">
+                            <label for="lnombre">Area</label>
+                            <input type="text" class="form-control" [(ngModel)]="i.are_description" name="descripcion">
+                        </div>
+
+
+                        <div class="col">
+                            <label for="ldireccion">Estado</label>
+                            <select class="form-select" aria-label="Default select example" [(ngModel)]="i.com_status" name="estado">
+                             <option value="true">Activo</option>
+                             <option value="false">Inactivo</option>
+                          </select>
+                        </div>
+                    </div>
+
+                    <div class="row col-xs-6">
+                        <div class="col">
+
+                            <input type="hidden" class="form-control" [(ngModel)]="i.are_idarea" name="id">
+                        </div>
+                        <div class="col">
+                            <div>&nbsp;</div>
+                        </div>
+                    </div>
+
+                    <div class="row col-xs-12">
+                        <div>&nbsp;</div>
+                    </div>
+
+                    <div class="row col-xs-12">
+                        <div class="col" style=" text-align: center;">
+                            <button type="button" mat-dialog-close class="btn btn-primary">Cancelar</button>
+                        </div>
+                        <div class="col" style=" text-align: center;">
+                            <button type="submit" mat-dialog-close class="btn btn-success">Guardar</button>
+                        </div>
+                    </div>
+                    <div class="row col-xs-12">
+                        <div>&nbsp;</div>
+                    </div>
+
+                </div>
+            </form>
+        </td>
+    </tr>
+</table>

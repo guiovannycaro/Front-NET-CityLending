@@ -1,0 +1,57 @@
+<form (ngSubmit)="onSubmit()">
+
+    <div style="width: 80% !important;MARGIN: 0% 5% 0% 10%;">
+
+        <div class="row col-xs-12">
+            <h1 style=" text-align: center;"><b> Nuevo Usuario</b></h1>
+        </div>
+
+        <div class="row col-xs-6">
+            <div class="col">
+                <label for="lnombre">Nombres</label>
+                <input type="text" class="form-control" id="nombres" name="nombres" [(ngModel)]="perfiles.descripcion" placeholder="Descripcion">
+            </div>
+            <div class="col">
+                <label for="ldireccion">Estado</label>
+                <select class="form-select" id="tdocumento" name="tdocumento" aria-label="Default select example" [(ngModel)]="perfiles.estado">
+                  <option value="true">Activo</option>
+                  <option value="false">Inactivo</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="row col-xs-6">
+            <div class="col">
+
+                <input type="hidden" class="form-control" id="id" name="id" [(ngModel)]="perfiles.idperfil">
+            </div>
+            <div class="col">
+                <div>&nbsp;</div>
+            </div>
+        </div>
+
+
+
+
+
+
+        <div class="row col-xs-12">
+            <div>&nbsp;</div>
+        </div>
+        <div class="row col-xs-12">
+            <div class="col" style=" text-align: center;">
+                <button type="button" class="btn btn-primary" mat-dialog-close="true">Cancelar</button>
+            </div>
+            <div class="col" style=" text-align: center;">
+                <button type="submit" [mat-dialog-close]="true" class="btn btn-success">Guardar</button>
+            </div>
+        </div>
+
+
+        <div class="row col-xs-12">
+            <div>&nbsp;</div>
+        </div>
+    </div>
+
+</form>

@@ -1,0 +1,128 @@
+<form [formGroup]="usuForm" (ngSubmit)="onSubmit()">
+
+    <div style="width: 80% !important;MARGIN: 0% 5% 0% 10%;">
+
+        <div class="row col-xs-12">
+            <h1 style="margin: 3% 0% 0% 20% ;text-align: center;"><b> Nueva Company</b></h1>
+        </div>
+
+        <div class="row col-xs-6">
+            <div class="col">
+                <label for="lnombre">Nombre</label>
+                <input type="text" class="form-control" id="names" name="names" formControlName="usu_nombre" placeholder="Nombre">
+            </div>
+            <div class="col">
+                <label for="ldireccion">Apellido</label>
+
+                <input type="text" class="form-control" id="adress" name="adress" formControlName="usu_apellido" placeholder="Direccion">
+
+
+
+            </div>
+        </div>
+
+        <div class="row col-xs-6">
+            <div class="col">
+                <label for="lnombre">Tipo Documento</label>
+                <select class="form-select" aria-label="Default select example" id="doctype" name="doctype" formControlName="usu_idtipodocumento" style="width: 100%;height: 38px;border: 1px solid #ced4da">
+                <option [value]='0' selected>Select Option</option>
+                <option [value]='1'>Cedula</option>
+                <option [value]='2'>Nit</option>
+              </select>
+            </div>
+            <div class="col">
+                <label for="ldireccion">Numero Documento</label>
+
+                <input type="number" class="form-control" id="com_number" name="com_number" formControlName="usu_numerodocumento" placeholder="Numero">
+            </div>
+        </div>
+
+
+        <div class="row col-xs-6">
+            <div class="col">
+                <label for="lnombre">Direccion</label>
+                <input type="text" class="form-control" id="usu_direccion" name="usu_direccion" formControlName="usu_direccion" placeholder="Nombre">
+            </div>
+            <div class="col">
+                <label for="ldireccion">Telefono</label>
+
+                <input type="text" class="form-control" id="usu_telefono" name="usu_telefono" formControlName="usu_telefono" placeholder="Direccion">
+
+
+
+            </div>
+        </div>
+
+        <div class="row col-xs-6">
+            <div class="col">
+                <label for="lnombre">Email</label>
+                <input type="text" class="form-control" id="usu_email" name="usu_email" formControlName="usu_email" placeholder="Nombre">
+            </div>
+            <div class="col">
+                <label for="ldireccion">Contrasena</label>
+
+                <input type="text" class="form-control" id="usu_contrasena" name="usu_contrasena" formControlName="usu_contrasena" placeholder="Direccion">
+
+
+
+            </div>
+        </div>
+
+        <div class="row col-xs-6">
+            <div class="col">
+                <label for="lnombre">Ciudad</label>
+                <select class="form-select" aria-label="Default select example" id="com_idciudad" name="usu_ciudad" formControlName="usu_ciudad" style="width: 100%;height: 38px;border: 1px solid #ced4da">
+                <option [value]='0' selected>Select Option</option>
+                <option [value]='512'>Bogota</option>
+              </select>
+            </div>
+            <div class="col">
+                <label for="ldireccion">Estado</label>
+
+                <select class="form-select" aria-label="Default select example" id="usu_estado" name="usu_estado" formControlName="com_status" style="width: 100%;height: 38px;border: 1px solid #ced4da">
+          <option selected>Select Option</option>
+          <option value="true">Active</option>
+          <option value="false">Inactive</option>
+
+        </select>
+
+            </div>
+        </div>
+
+
+        <div class="row col-xs-6">
+            <div class="col">
+                <label for="lnombre">Cambiar Pass</label>
+                <select class="form-select" aria-label="Default select example" id="usu_cambiocontrasena" name="usu_cambiocontrasena" formControlName="usu_cambiocontrasena" style="width: 100%;height: 38px;border: 1px solid #ced4da">
+                <option selected>Select Option</option>
+                <option value="true">Active</option>
+                <option value="false">Inactive</option>
+
+              </select>
+            </div>
+            <div class="col">
+                <div>&nbsp;</div>>
+
+            </div>
+        </div>
+
+        <div class="row col-xs-12">
+            <div>&nbsp;
+                <input type="hidden" class="form-control" id="idusuario" name="idusuario" formControlName="idusuario" value="0">
+            </div>
+        </div>
+        <div class="row col-xs-12">
+            <div class="col" style=" text-align: center;">
+                <button type="button" class="btn btn-primary" mat-dialog-close="true">Cancelar</button>
+            </div>
+            <div class="col" style=" text-align: center;">
+                <button type="submit" [mat-dialog-close]="true" class="btn btn-success">Guardar</button>
+            </div>
+        </div>
+
+
+        <div class="row col-xs-12">
+            <div>&nbsp;</div>
+        </div>
+    </div>
+</form>

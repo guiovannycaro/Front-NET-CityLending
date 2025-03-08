@@ -1,0 +1,82 @@
+<form (ngSubmit)="onSubmit()">
+
+    <div style="width: 80% !important;MARGIN: 0% 5% 0% 10%;">
+
+        <div class="row col-xs-12">
+            <h1 style=" text-align: center;"><b> Nuevo Usuario</b></h1>
+        </div>
+
+        <div class="row col-xs-6">
+            <div class="col">
+                <label for="lnombre">Nombres</label>
+                <select class="form-select" id="sch_idcompanylocation" name="sch_idcompanylocation" aria-label="Default select example" [(ngModel)]="ubicaciones.sch_idcompanylocation">
+                  <option value="2">la salle</option>
+                  <option value="3">la catolic</option>
+                </select>
+            </div>
+            <div class="col">
+                <label for="ldireccion">Estado</label>
+                <select class="form-select" id="sch_area" name="sch_area" aria-label="Default select example" [(ngModel)]="ubicaciones.sch_area">
+                <option value="1">Contabilidad</option>
+                <option value="11">Tesoreria</option>
+              </select>
+            </div>
+        </div>
+
+        <div class="row col-xs-6">
+            <div class="col">
+                <label for="lnombre">Hora inicial</label>
+                <input type="text" class="form-control" id="sch_initialtime" name="sch_initialtime" [(ngModel)]="ubicaciones.sch_initialtime" placeholder="Hora inicial">
+            </div>
+            <div class="col">
+
+                <label for="lnombre">Hora Final</label>
+                <input type="text" class="form-control" id="sch_finaltime" name="sch_finaltime" [(ngModel)]="ubicaciones.sch_finaltime" placeholder="Hora Final">
+            </div>
+        </div>
+
+
+        <div class="row col-xs-6">
+            <div class="col">
+                <div>&nbsp;</div>>
+            </div>
+            <div class="col">
+                <div>&nbsp;</div>>
+            </div>
+        </div>
+
+
+        <div class="row col-xs-6">
+            <div class="col">
+
+                <input type="text" class="form-control" id="id" name="id" [(ngModel)]="ubicaciones.sch_iduser">
+            </div>
+            <div class="col">
+                <div>&nbsp;</div>
+            </div>
+        </div>
+
+
+
+
+
+
+        <div class="row col-xs-12">
+            <div>&nbsp;</div>
+        </div>
+        <div class="row col-xs-12">
+            <div class="col" style=" text-align: center;">
+                <button type="button" class="btn btn-primary" mat-dialog-close="true">Cancelar</button>
+            </div>
+            <div class="col" style=" text-align: center;">
+                <button type="submit" [mat-dialog-close]="true" class="btn btn-success">Guardar</button>
+            </div>
+        </div>
+
+
+        <div class="row col-xs-12">
+            <div>&nbsp;</div>
+        </div>
+    </div>
+
+</form>
