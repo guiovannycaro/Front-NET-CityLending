@@ -12,17 +12,19 @@
 
                     <div class="row col-xs-6">
                         <div class="col">
-                            <label for="lnombre">Nombres</label>
+                            <label for="lnombre">Company</label>
                             <select class="form-select" id="sch_idcompanylocation" name="sch_idcompanylocation" aria-label="Default select example" [(ngModel)]="u.sch_idcompanylocation">
-                <option value="2">la salle</option>
-                <option value="3">la catolic</option>
+
+
+                              <option *ngFor="let area of companysar" [value]="area.com_idcompany">{{ area.com_name }}</option>
+
+
               </select>
                         </div>
                         <div class="col">
-                            <label for="ldireccion">Estado</label>
+                            <label for="ldireccion">Area</label>
                             <select class="form-select" id="sch_area" name="sch_area" aria-label="Default select example" [(ngModel)]="u.sch_area">
-              <option value="1">Contabilidad</option>
-              <option value="11">Tesoreria</option>
+                              <option *ngFor="let area of areasar" [value]="area.are_idarea">{{ area.are_description }}</option>
             </select>
                         </div>
                     </div>

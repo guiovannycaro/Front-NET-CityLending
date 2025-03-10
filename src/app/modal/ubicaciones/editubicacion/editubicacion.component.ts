@@ -6,8 +6,10 @@ import { Ubicaciones } from 'src/app/modelos/ubicaciones';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UbicacionesService } from 'src/app/services/ubicaciones.service';
 import { ChangeDetectorRef } from '@angular/core';
-
-
+import { Compania } from 'src/app/modelos/compania';
+import { Areas } from 'src/app/modelos/areas';
+import { AreasService } from '../../../services/areas.service';
+import { CompaniasService } from '../../../services/companias.service';
 declare var $: any;
 
 @Component({
@@ -21,10 +23,14 @@ export class EditubicacionComponent implements OnInit{
 
   ubicaciones: Ubicaciones = new Ubicaciones();
   ubicacionesar: Ubicaciones [] =[];
+  companysar : Compania[]=[];
+  areasar : Areas[] =[];
 
   constructor(
     private fb:FormBuilder,
     private api:UbicacionesService,
+    private apiare:AreasService,
+    private apicom:CompaniasService,
     public dialogRef: MatDialogRef<EditubicacionComponent>,
     private cdr: ChangeDetectorRef,
     private routera: ActivatedRoute,
@@ -112,6 +118,20 @@ export class EditubicacionComponent implements OnInit{
      }, 500); // Pequeño delay para asegurar que los datos se actualicen
    }
 
+
+   findCompanias(){
+     this.apicom.getCompanyList().subscribe(dato => {
+      console.log("Datos recibidos del backend:", dato);
+      this.companysar = [...dato];
+    });
+   }
+
+   findAreas(){
+     this.apiare.getAreasList().subscribe(dato => {
+       console.log("Datos recibidos del backend:", dato);
+       this.areasar = [...dato];
+     });
+   }
 
  onSubmit(){
   this.ubicacionesar.forEach((ubica, index) => {
