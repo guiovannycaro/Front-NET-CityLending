@@ -1,85 +1,85 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import {AfterViewInit, Component, ViewChild, OnInit} from '@angular/core';
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import {MatSort, MatSortModule} from '@angular/material/sort';
+import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialogModule,MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
-import { Areas } from '../../modelos/areas';
+
+import { Areas } from '../../interfases/areas';
 import { AreasService } from '../../services/areas.service';
-import { AddareaComponent } from '../../modal/area/addarea/addarea.component';
+import { AddareaComponent } from 'src/app/modal/area/addarea/addarea.component';
 import { EditareaComponent } from 'src/app/modal/area/editarea/editarea.component';
 
-
 declare var $: any;
+
+
+
+
+/** Constants used to fill up our data base. */
+
 
 @Component({
   selector: 'app-areas',
   templateUrl: './areas.component.html',
   styleUrls: ['./areas.component.css']
 })
-export class AreasComponent implements OnInit {
+export class AreasComponent  implements AfterViewInit,OnInit {
+ displayedColumns: string[] = ['id', 'Descripcion', 'Estado','Acciones'];
+  dataSource = new MatTableDataSource<Areas>();
 
-  areas: Areas[] = [];
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(
-    private api: AreasService,
-    private router: Router,
-    public dialog: MatDialog
-  ) {}
+  constructor(private api: AreasService,
+      private router: Router,
+      public dialog: MatDialog
+
+    ) {
+
+  }
+
 
   ngOnInit(): void {
     this.obtenerAreas();
   }
 
   private obtenerAreas() {
-    this.api.getAreasList().subscribe(dato => {
-      console.log("Datos recibidos del backend:", dato);
-      this.areas = [...dato];
+    this.api.getAreasList().subscribe({
+      next: (dato) => {
+        console.log("Datos recibidos del backend:", dato);
+        this.dataSource = new MatTableDataSource(dato);
+        this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
 
-      setTimeout(() => {
-        this.inicializarDataTable();
-      }, 300);
+      },
+      error: (x) => {
+        console.error("Error al obtener áreas:", x);
+        Swal.fire("Error", "No se pudo obtener la lista de áreas.", "error");
+      }
     });
   }
 
-  private inicializarDataTable() {
-    if ($.fn.DataTable.isDataTable("#dtBasicExample")) {
-      $('#dtBasicExample').DataTable().destroy();
+    openAddProForm() {
+      this.dialog.open(AddareaComponent);
+
     }
 
-    setTimeout(() => {
-      $('#dtBasicExample').DataTable({
-        responsive: true
+      openEditProForm(id: number) {
+        if (!id) {
+          console.error("Error: ID es undefined o null");
+          return;
+        }
 
-      });
-    }, 100);
-  }
+        this.dialog.open(EditareaComponent, {
+          data: { are_idcarea: id },
+          width: '500px'
+        });
+      }
 
-  onEnter(event: KeyboardEvent) {
-    if (event.key === "Enter") {
-      console.log("Enter presionado, recargando datos...");
-      this.obtenerAreas();
-    }
-  }
-
-  openAddProForm() {
-    this.dialog.open(AddareaComponent);
-
-  }
-
-
-  openEditProForm(id: number) {
-    if (!id) {
-      console.error("Error: ID es undefined o null");
-      return;
-    }
-
-    this.dialog.open(EditareaComponent, {
-      data: { are_idcarea: id },
-      width: '500px'
-    });
-  }
-
-
-  openDropProForm(id: number) {
+openDropProForm(id: number) {
     Swal.fire({
       title: '¿Estás seguro?',
       text: 'No podrás revertir esta acción',
@@ -106,8 +106,20 @@ export class AreasComponent implements OnInit {
     });
   }
 
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
 
-
-
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 }
+
+
+

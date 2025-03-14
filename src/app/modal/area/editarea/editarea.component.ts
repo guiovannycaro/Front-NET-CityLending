@@ -87,7 +87,7 @@ export class EditareaComponent implements OnInit {
           confirmButtonText: 'Aceptar'
         }).then(() => {
           this.dialogRef.close(true);
-          this.recargarTabla(); // Recargar DataTable
+
         });
       },
       error: (error) => {
@@ -100,19 +100,6 @@ export class EditareaComponent implements OnInit {
         });
       }
     });
-  }
-
-  // Método para recargar DataTable
-  recargarTabla() {
-    setTimeout(() => {
-      $('#dtBasicExample').DataTable().destroy(); // Destruye la instancia anterior
-      $('#dtBasicExample').DataTable({
-        retrieve: true, // Permite reutilizar la tabla
-        paging: true,   // Habilita paginación
-        searching: true // Habilita búsqueda
-      });
-      $('.dataTables_length').addClass('bs-select');
-    }, 500); // Pequeño delay para asegurar que los datos se actualicen
   }
 
   onSubmit() {

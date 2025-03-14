@@ -34,25 +34,7 @@ export class UbicacionesComponent  implements OnInit{
       this.api.getUbicacionesList().subscribe(dato => {
         console.log("Datos recibidos del backend:", dato);
         this.ubicaciones = dato;
-
-        setTimeout(() => {
-          this.inicializarDataTable();
-        }, 300);
       });
-    }
-
-
-    private inicializarDataTable() {
-      if ($.fn.DataTable.isDataTable("#dtBasicExample")) {
-        $('#dtBasicExample').DataTable().destroy();
-      }
-    }
-
-    onEnter(event: KeyboardEvent) {
-      if (event.key === "Enter") {
-        console.log("Enter presionado, recargando datos...");
-        this.obtenerUbicacion();
-      }
     }
 
   openAddComForm() {

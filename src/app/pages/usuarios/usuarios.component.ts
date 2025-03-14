@@ -38,25 +38,14 @@ export class UsuariosComponent implements OnInit{
         console.log("Datos recibidos del backend:", dato);
         this.usuarios = [...dato];
 
-        setTimeout(() => {
-          this.inicializarDataTable();
-        }, 300);
+
       });
     }
 
 
-    private inicializarDataTable() {
-      if ($.fn.DataTable.isDataTable("#dtBasicExample")) {
-        $('#dtBasicExample').DataTable().destroy();
-      }
-    }
 
-    onEnter(event: KeyboardEvent) {
-      if (event.key === "Enter") {
-        console.log("Enter presionado, recargando datos...");
-        this.obtenerUsuarios();
-      }
-    }
+
+
 
   openAddComForm() {
       this.dialog.open(AdduserComponent);

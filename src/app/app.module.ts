@@ -42,6 +42,11 @@ import { PagesRoutingModule } from './pages/pages-routing.module';
 import { AddubicacionComponent } from './modal/ubicaciones/addubicacion/addubicacion.component';
 import { EditubicacionComponent } from './modal/ubicaciones/editubicacion/editubicacion.component';
 import { DropubicacionComponent } from './modal/ubicaciones/dropubicacion/dropubicacion.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 
@@ -84,7 +89,11 @@ import { DropubicacionComponent } from './modal/ubicaciones/dropubicacion/dropub
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-
+MatFormFieldModule,
+ MatInputModule,
+  MatTableModule,
+   MatSortModule,
+    MatPaginatorModule,
     FormsModule,
     HttpClientModule,
     MatDialogModule,

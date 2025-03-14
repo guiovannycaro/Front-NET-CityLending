@@ -1,7 +1,12 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialogModule,MatDialog } from '@angular/material/dialog';
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import {MatSort, MatSortModule} from '@angular/material/sort';
+
 import Swal from 'sweetalert2';
+import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+
 import { Compania } from '../../modelos/compania';
 import { CompaniasService } from '../../services/companias.service';
 import { AddcompanyComponent } from '../../modal/company/addcompany/addcompany.component';
@@ -15,9 +20,14 @@ declare var $: any;
   templateUrl: './companias.component.html',
   styleUrls: ['./companias.component.css']
 })
-export class CompaniasComponent  implements OnInit{
-
+export class CompaniasComponent  implements OnInit,AfterViewInit{
+  displayedColumns: string[] = ['id', 'Nombre', 'Direccion','TipoDocumento',
+    'NumDocumento','Ciudad','Estado','AccessSchedule','Acciones'];
    companias: Compania[] = [];
+dataSource = new MatTableDataSource<Compania>();
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
    constructor(
     private api: CompaniasService,
@@ -32,25 +42,11 @@ export class CompaniasComponent  implements OnInit{
   private obtenerCompany() {
     this.api.getCompanyList().subscribe(dato => {
       console.log("Datos recibidos del backend:", dato);
-      this.companias = [...dato];
-
-      setTimeout(() => {
-        this.inicializarDataTable();
-      }, 300);
+      this.companias = dato;
+      this.dataSource = new MatTableDataSource(dato);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
-  }
-
-  private inicializarDataTable() {
-    if ($.fn.DataTable.isDataTable("#dtBasicExample")) {
-      $('#dtBasicExample').DataTable().destroy();
-    }
-  }
-
-  onEnter(event: KeyboardEvent) {
-    if (event.key === "Enter") {
-      console.log("Enter presionado, recargando datos...");
-      this.obtenerCompany();
-    }
   }
 
   openAddComForm() {
@@ -98,5 +94,18 @@ export class CompaniasComponent  implements OnInit{
     });
   }
 
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 
 }
